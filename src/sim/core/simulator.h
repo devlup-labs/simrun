@@ -1,11 +1,17 @@
 #pragma once
-#include "../events/event_queue.h"
+#include "sim_types.h"
 #include "scheduler.h"
+#include "event_loop.h"
 
-class Context;
-class State;
+#include "../entities/entity_context.h"
+#include "../entities/entity_state.h"
 
-class Simulator {
+using Context = SimulationContext;
+using State   = SimulationState;
+
+class EventQueue;
+
+class Simulator final : public EventLoop {
 private:
     SimTime current_time = 0;
 
@@ -22,6 +28,6 @@ public:
         State& st
     );
 
-    void run();
+    void run() override;
     SimTime now() const;
 };

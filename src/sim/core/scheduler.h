@@ -1,15 +1,18 @@
-//simulation componenets will only call scheduler.schedule(e) to schedule events onto queue
 #pragma once
-#include "../events/event_queue.h"
+#include <memory>
+
+class Event;
+class EventQueue;
 
 class EventScheduler {
 private:
-    EventQueue& queue; //private as components shouldnt manipulate event queue themselves
+    EventQueue& queue;  //private as components only schedule the events using scheduler, so they should not be able to inspect it
 
 public:
     explicit EventScheduler(EventQueue& q) : queue(q) {}
 
-    void schedule(Event* e) {
-        queue.push(e); //this is NOT saying "push to queue, it says this event will occur in simulated future"
+    void schedule(std::unique_ptr<Event> e) {
+        queue.push(std::move(e));
     }
+
 };

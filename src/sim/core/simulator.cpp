@@ -1,11 +1,5 @@
-// NOTE:
-// DES model: time advances only via scheduling of future events.
-// Simulation time does NOT advance based on execution or wall-clock time.
-// Latency and failure oracles are consulted inside event execution logic to decide timestamps of future events
-// to decide the timestamps of those future events.
-// The simulator itself remains policy-free and simply jumps to e->time.
-
 #include "simulator.h"
+#include "event_queue.h"
 #include "../events/event.h"
 
 Simulator::Simulator(
@@ -20,19 +14,14 @@ Simulator::Simulator(
 
 void Simulator::run() {
     while (!queue.empty()) {
-        Event* e = queue.pop();
+        auto event = queue.pop();
 
-        //SimTime just jumps to the timestamp of current event about to occur
-        current_time = e->time;
+        current_time = event->time;
 
-        // Simulator is dumb and just calls the execute function
-        e->execute(context, state, scheduler);
-
-        delete e;  // later: pool allocator
+        event->execute(context, state, scheduler);
     }
 }
 
 SimTime Simulator::now() const {
     return current_time;
 }
-
