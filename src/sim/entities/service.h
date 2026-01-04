@@ -15,12 +15,12 @@ public:
 
     ServiceEntity(
         std::string id,
-        int capacity_,
-        double latency_mean_,
-        double failure_prob_
+        int capacity,
+        double latency_mean,
+        double failure_prob
     )
         : BaseEntity(std::move(id)),
-          capacity(capacity_),
-          latency_mean(latency_mean_),
-          failure_prob(failure_prob_) {}
+          capacity(capacity),
+          latency_mean(latency_mean),
+          failure_prob(failure_prob) {}
 };

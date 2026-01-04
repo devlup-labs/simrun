@@ -4,7 +4,7 @@
 class DatabaseEntity final : public BaseEntity {
 public:
     // ---- context ----
-    const int max_connections;
+    const int capacity;
     const double latency_mean;
     const double failure_prob;
 
@@ -14,12 +14,12 @@ public:
 
     DatabaseEntity(
         std::string id,
-        int max_conn,
-        double latency_mean_,
-        double failure_prob_
+        int capacity,
+        double latency_mean,
+        double failure_prob
     )
         : BaseEntity(std::move(id)),
-          max_connections(max_conn),
-          latency_mean(latency_mean_),
-          failure_prob(failure_prob_) {}
+          capacity(capacity),
+          latency_mean(latency_mean),
+          failure_prob(failure_prob) {}
 };

@@ -5,33 +5,37 @@
 #include <queue>
 #include <vector>
 
+using std::unique_ptr;
+using std::priority_queue;
+using std::vector;
+using std::move;
+
 namespace {
 
 struct EventCompare {
     bool operator()(
-        const std::unique_ptr<Event>& a,
-        const std::unique_ptr<Event>& b
+        const unique_ptr<Event>& a,
+        const unique_ptr<Event>& b
     ) const {
-        //TO-DO : TIE BREAKER ALGORITHM
         return a->time > b->time;
     }
 };
 
 class PriorityEventQueue : public EventQueue {
 private:
-    std::priority_queue<
-        std::unique_ptr<Event>,
-        std::vector<std::unique_ptr<Event>>,
+    priority_queue<
+        unique_ptr<Event>,
+        vector<unique_ptr<Event>>,
         EventCompare
     > pq;
 
 public:
-    void push(std::unique_ptr<Event> e) override {
-        pq.push(std::move(e));
+    void push(unique_ptr<Event> e) override {
+        pq.push(move(e));
     }
 
-    std::unique_ptr<Event> pop() override {
-        auto e = std::move(pq.top());
+    unique_ptr<Event> pop() override {
+        auto e = move(pq.top());
         pq.pop();
         return e;
     }
@@ -41,4 +45,5 @@ public:
     }
 };
 
-} 
+}
+

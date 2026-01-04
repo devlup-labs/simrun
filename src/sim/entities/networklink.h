@@ -16,14 +16,14 @@ public:
 
     NetworkLinkEntity(
         std::string id,
-        std::string from_,
-        std::string to_,
-        double latency_mean_,
-        double failure_prob_
+        std::string from,
+        std::string to,
+        double latency_mean,
+        double failure_prob
     )
         : BaseEntity(std::move(id)),
-          from(std::move(from_)),
-          to(std::move(to_)),
-          latency_mean(latency_mean_),
-          failure_prob(failure_prob_) {}
+          from(std::move(from)),
+          to(std::move(to)),
+          latency_mean(latency_mean),
+          failure_prob(failure_prob) {}
 };

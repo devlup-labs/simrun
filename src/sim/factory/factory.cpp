@@ -1,10 +1,14 @@
 #include "entity_factory.h"
 #include <stdexcept>
 
+using std::make_unique;
+using std::runtime_error;
+using std::vector;
+
 // ---------------- Public ----------------
 
 void EntityFactory::build(
-    const std::vector<IRNode>& ir,
+    const vector<IRNode>& ir,
     Simulation& simulation
 ) {
     create_entities(ir, simulation);
@@ -13,38 +17,36 @@ void EntityFactory::build(
 // ---------------- Private ----------------
 
 void EntityFactory::create_entities(
-    const std::vector<IRNode>& ir,
+    const vector<IRNode>& ir,
     Simulation& simulation
 ) {
     for (const auto& node : ir) {
 
         switch (node.type) {
 
-        case IRType::SERVICE: {
+        case IRType::SERVICE:
             simulation.entities[node.id] =
-                std::make_unique<ServiceEntity>(
+                make_unique<ServiceEntity>(
                     node.id,
                     node.capacity,
                     node.latency_mean,
                     node.failure_prob
                 );
             break;
-        }
 
-        case IRType::DATABASE: {
+        case IRType::DATABASE:
             simulation.entities[node.id] =
-                std::make_unique<DatabaseEntity>(
+                make_unique<DatabaseEntity>(
                     node.id,
                     node.capacity,
                     node.latency_mean,
                     node.failure_prob
                 );
             break;
-        }
 
-        case IRType::NETWORK_LINK: {
+        case IRType::NETWORK_LINK:
             simulation.entities[node.id] =
-                std::make_unique<NetworkLinkEntity>(
+                make_unique<NetworkLinkEntity>(
                     node.id,
                     node.from,
                     node.to,
@@ -52,11 +54,9 @@ void EntityFactory::create_entities(
                     node.failure_prob
                 );
             break;
-        }
 
         default:
-            throw std::runtime_error("Unknown IRType");
+            throw runtime_error("Unknown IRType");
         }
     }
 }
-
