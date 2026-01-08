@@ -1,0 +1,12 @@
+{
+  "name": "compiler-ui-electron",
+  "version": "1.0.0",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^39.2.7"
+  }
+}

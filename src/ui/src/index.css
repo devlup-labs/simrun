@@ -1,0 +1,546 @@
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SimRUN Desktop Architecture Designer - Premium Dark Theme */
+
+@layer base {
+  :root {
+    /* Light mode palette */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 20%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 94%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.5rem;
+
+    /* Premium gradient accent colors */
+    --gradient-primary-from: 239 84% 67%;
+    --gradient-primary-to: 270 80% 60%;
+
+    /* Component category gradients */
+    --database-from: 217 91% 60%;
+    --database-to: 217 91% 45%;
+    --database: 217 91% 55%;
+    --database-bg: 217 91% 95%;
+
+    --cache-from: 38 92% 50%;
+    --cache-to: 25 95% 53%;
+    --cache: 38 92% 50%;
+    --cache-bg: 38 92% 95%;
+
+    --api-from: 160 84% 39%;
+    --api-to: 142 76% 36%;
+    --api: 160 84% 39%;
+    --api-bg: 160 84% 95%;
+
+    --network-from: 270 80% 60%;
+    --network-to: 262 83% 58%;
+    --network: 270 80% 60%;
+    --network-bg: 270 80% 95%;
+
+    /* Canvas */
+    --canvas-bg: 210 40% 96%;
+    --canvas-grid: 214 32% 85%;
+    --canvas-grid-accent: 214 32% 80%;
+
+    /* Node styles */
+    --node-bg: 0 0% 100%;
+    --node-border: 214 32% 85%;
+    --node-selected: 239 84% 67%;
+    --node-shadow: 0 8px 32px -8px hsl(0 0% 0% / 0.1);
+
+    /* Connection styles */
+    --edge-default: 214 32% 70%;
+    --edge-selected: 239 84% 67%;
+
+    /* Sidebar - glassmorphism */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 239 84% 67%;
+  }
+
+  .dark {
+    /* Deep dark premium theme */
+    --background: 240 15% 6%;
+    --foreground: 210 20% 95%;
+
+    --card: 240 15% 9%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 240 15% 11%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 15% 14%;
+    --secondary-foreground: 210 20% 88%;
+
+    --muted: 240 15% 12%;
+    --muted-foreground: 215 15% 50%;
+
+    --accent: 240 15% 16%;
+    --accent-foreground: 210 20% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 15% 16%;
+    --input: 240 15% 14%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.5rem;
+
+    /* Premium gradient accent colors */
+    --gradient-primary-from: 239 84% 67%;
+    --gradient-primary-to: 270 80% 60%;
+
+    /* Component category gradients */
+    --database-from: 217 91% 60%;
+    --database-to: 217 91% 45%;
+    --database: 217 91% 55%;
+    --database-bg: 217 91% 10%;
+
+    --cache-from: 38 92% 50%;
+    --cache-to: 25 95% 53%;
+    --cache: 38 92% 50%;
+    --cache-bg: 38 92% 8%;
+
+    --api-from: 160 84% 39%;
+    --api-to: 142 76% 36%;
+    --api: 160 84% 39%;
+    --api-bg: 160 84% 8%;
+
+    --network-from: 270 80% 60%;
+    --network-to: 262 83% 58%;
+    --network: 270 80% 60%;
+    --network-bg: 270 80% 10%;
+
+    /* Canvas */
+    --canvas-bg: 240 15% 5%;
+    --canvas-grid: 240 15% 10%;
+    --canvas-grid-accent: 240 15% 14%;
+
+    /* Node styles */
+    --node-bg: 240 15% 12%;
+    --node-border: 240 15% 22%;
+    --node-selected: 239 84% 67%;
+    --node-shadow: 0 8px 32px -8px hsl(0 0% 0% / 0.5);
+
+    /* Connection styles */
+    --edge-default: 240 15% 35%;
+    --edge-selected: 239 84% 67%;
+
+    /* Sidebar - glassmorphism */
+    --sidebar-background: 240 15% 7%;
+    --sidebar-foreground: 210 20% 88%;
+    --sidebar-primary: 239 84% 67%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 15% 12%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 240 15% 14%;
+    --sidebar-ring: 239 84% 67%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Theme transition for all elements */
+  *, *::before, *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Glassmorphism utilities */
+@layer utilities {
+  .glass {
+    background: hsl(var(--card) / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-strong {
+    background: hsl(var(--card) / 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.6);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--gradient-primary-from)), hsl(var(--gradient-primary-to)));
+  }
+
+  .gradient-database {
+    background: linear-gradient(135deg, hsl(var(--database-from)), hsl(var(--database-to)));
+  }
+
+  .gradient-cache {
+    background: linear-gradient(135deg, hsl(var(--cache-from)), hsl(var(--cache-to)));
+  }
+
+  .gradient-api {
+    background: linear-gradient(135deg, hsl(var(--api-from)), hsl(var(--api-to)));
+  }
+
+  .gradient-network {
+    background: linear-gradient(135deg, hsl(var(--network-from)), hsl(var(--network-to)));
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 24px -4px hsl(var(--primary) / 0.5);
+  }
+
+  .glow-database {
+    box-shadow: 0 0 20px -4px hsl(var(--database) / 0.5);
+  }
+
+  .glow-cache {
+    box-shadow: 0 0 20px -4px hsl(var(--cache) / 0.5);
+  }
+
+  .glow-api {
+    box-shadow: 0 0 20px -4px hsl(var(--api) / 0.5);
+  }
+
+  .glow-network {
+    box-shadow: 0 0 20px -4px hsl(var(--network) / 0.5);
+  }
+
+  .border-gradient-database {
+    border: 2px solid transparent;
+    background: linear-gradient(hsl(var(--node-bg)), hsl(var(--node-bg))) padding-box,
+                linear-gradient(135deg, hsl(var(--database-from)), hsl(var(--database-to))) border-box;
+  }
+
+  .border-gradient-cache {
+    border: 2px solid transparent;
+    background: linear-gradient(hsl(var(--node-bg)), hsl(var(--node-bg))) padding-box,
+                linear-gradient(135deg, hsl(var(--cache-from)), hsl(var(--cache-to))) border-box;
+  }
+
+  .border-gradient-api {
+    border: 2px solid transparent;
+    background: linear-gradient(hsl(var(--node-bg)), hsl(var(--node-bg))) padding-box,
+                linear-gradient(135deg, hsl(var(--api-from)), hsl(var(--api-to))) border-box;
+  }
+
+  .border-gradient-network {
+    border: 2px solid transparent;
+    background: linear-gradient(hsl(var(--node-bg)), hsl(var(--node-bg))) padding-box,
+                linear-gradient(135deg, hsl(var(--network-from)), hsl(var(--network-to))) border-box;
+  }
+}
+
+/* React Flow customizations */
+.react-flow__background {
+  background-color: hsl(var(--canvas-bg)) !important;
+}
+
+.react-flow__background-pattern circle {
+  fill: hsl(var(--canvas-grid)) !important;
+}
+
+.react-flow__edge-path {
+  stroke: hsl(var(--edge-default)) !important;
+  stroke-width: 2px;
+  transition: stroke 0.2s ease, stroke-width 0.2s ease;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: hsl(var(--edge-selected)) !important;
+  stroke-width: 3px;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: hsl(var(--primary)) !important;
+  stroke-width: 3px;
+}
+
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: hsl(var(--muted-foreground)) !important;
+  border: 2px solid hsl(var(--node-bg)) !important;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.react-flow__node:hover .react-flow__handle {
+  opacity: 1;
+}
+
+.react-flow__handle:hover {
+  background: hsl(var(--primary)) !important;
+  transform: scale(1.3);
+  box-shadow: 0 0 12px hsl(var(--primary) / 0.6);
+}
+
+.react-flow__controls {
+  background: hsl(var(--card) / 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 32px -8px hsl(0 0% 0% / 0.4) !important;
+}
+
+.react-flow__controls-button {
+  background: transparent !important;
+  border-bottom: 1px solid hsl(var(--border) / 0.5) !important;
+  fill: hsl(var(--foreground)) !important;
+  transition: all 0.2s ease;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.react-flow__controls-button:hover {
+  background: hsl(var(--accent)) !important;
+  fill: hsl(var(--primary)) !important;
+}
+
+.react-flow__controls-button:last-child {
+  border-bottom: none !important;
+}
+
+.react-flow__minimap {
+  background: hsl(var(--card) / 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 8px 32px -8px hsl(0 0% 0% / 0.4) !important;
+}
+
+.react-flow__minimap-mask {
+  fill: hsl(var(--canvas-bg) / 0.85) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Animations */
+@keyframes node-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px hsl(var(--primary) / 0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-node-pulse {
+  animation: node-pulse 2s infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.1), transparent);
+  background-size: 200% 100%;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Component card hover effect */
+.component-card {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.component-card:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.component-card:active {
+  transform: scale(0.98);
+}
+
+/* Premium button styles */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-premium:hover::before {
+  left: 100%;
+}
+
+/* Empty state illustration */
+.empty-state-grid {
+  background-image: 
+    linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
