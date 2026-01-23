@@ -1,53 +1,68 @@
 #pragma once
-#include <string>
-#include <vector>
+
 #include <unordered_map>
 #include <memory>
+#include <vector>
 
-// Entities
+#include "../context/simulation_context.h"
+#include "../ir/ir_types.h"
+
+// Components
 #include "../entities/service.h"
 #include "../entities/database.h"
-#include "../entities/network_link.h"
+#include "../entities/cache.h"
 
-// IR (will be changed after UI -> frontend is finalised)
+// Links
+#include "../network/network_link.h"
 
-enum class IRType {
-    SERVICE,
-    DATABASE,
-    NETWORK_LINK
-};
-
-struct IRNode {
-    std::string id;
-    IRType type;
-
-    // For network links
-    std::string from;
-    std::string to;
-
-    // Common parameters
-    int capacity;
-    double latency_mean;
-    double failure_prob;
-};
-
-// ------------- Simulation Registry -------------
-
-struct Simulation {
-    std::unordered_map<std::string, std::unique_ptr<BaseEntity>> entities;
-};
-
-// Factory
 class EntityFactory {
 public:
-    void build(
-        const std::vector<IRNode>& ir,
-        Simulation& simulation
+    explicit EntityFactory(SimulationContext& ctx);
+
+    void createComponents(const std::vector<IRComponent>& components);
+    void createLinks(const std::vector<IRLink>& links);
+
+    /* Initial state */
+    void applyComponentContext(
+        const std::vector<IRComponentContext>& context
+    );
+
+    void applyLinkContext(
+        const std::vector<IRLinkContext>& context
+    );
+
+    /* Request types */
+    void registerRequestTypes(
+        const std::vector<IRRequestType>& request_types
     );
 
 private:
-    void create_entities(
-        const std::vector<IRNode>& ir,
-        Simulation& simulation
+    SimulationContext& ctx;
+
+    /* Componenet Helpers */
+    void createService(const IRComponent& c);
+    void createDatabase(const IRComponent& c);
+    void createCache(const IRComponent& c);
+
+
+    /* -------- Events -------- */
+    Event* createEvent(
+        EventType type,
+        double timestamp,
+        uint64_t seed,
+        Request* req
     );
+
+    Event* createDBRequestArrival(
+        double ts,
+        uint64_t seed,
+        Request* req
+    );
+    
+    Event* createDBRequestSend(
+        double ts,
+        uint64_t seed,
+        Request* req
+    );
+
 };
