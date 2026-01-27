@@ -1,0 +1,5 @@
+defaults:
+  base_cache_hit_probability: 0.85
+  base_cache_hit_latency: 0.2
+  base_cache_miss_latency: 1.0
+  max_concurrency: 500
