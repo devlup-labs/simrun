@@ -1,0 +1,9 @@
+src/electron/node_modules/
+src/ui-lovable/node_modules/
+src/ui/node_modules/
+src/ui/electron/node_modules/
+src/compiler/ast/
+src/compiler/bad.json
+.vscode/
+*.exe
+node_modules/

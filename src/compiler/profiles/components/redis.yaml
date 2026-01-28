@@ -1,0 +1,4 @@
+defaults:
+  port: 6379
+  max_connections: 10000
+  base_latency_ms: 0.2

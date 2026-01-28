@@ -1,0 +1,3 @@
+[submodule "src/ui-lovable"]
+	path = src/ui-lovable
+	url = https://github.com/anirudhiitj/sim-architect-design.git

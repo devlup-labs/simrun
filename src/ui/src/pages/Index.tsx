@@ -6,6 +6,19 @@ import { ConfigTabs } from '@/components/panels/ConfigTabs';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 const Index = () => {
+  const handleRunSimulation = async () => {
+    const projectJson = {
+      test: "demo" // replace later with real canvas export
+    };
+
+    try {
+      const result = await window.api.simulate(projectJson);
+      console.log("Simulation response:", result);
+    } catch (err) {
+      console.error("Simulation failed:", err);
+    }
+  };
+
   return (
     <TooltipProvider>
       <div className="flex h-screen w-full overflow-hidden bg-background">
@@ -15,7 +28,7 @@ const Index = () => {
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Header */}
-          <CanvasHeader />
+          <CanvasHeader onRunSimulation={handleRunSimulation} />
 
           {/* Canvas */}
           <ArchitectureCanvas />

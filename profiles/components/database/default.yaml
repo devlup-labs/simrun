@@ -1,0 +1,9 @@
+defaults:
+  seek_model: lognormal
+  base_median_seek_ms: 5.0
+  base_variance_seek_ms: 0.6
+  max_iops: 4000
+  bucket_capacity: 8000
+  initial_tokens: 8000
+  max_concurrency: 1500
+  queue_capacity: 5000

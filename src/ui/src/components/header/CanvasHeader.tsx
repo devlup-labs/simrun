@@ -38,7 +38,11 @@ import {
 } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 
-export const CanvasHeader = () => {
+type CanvasHeaderProps = {
+  onRunSimulation?: () => void;
+};
+
+export const CanvasHeader = ({ onRunSimulation }: CanvasHeaderProps) => {
   const { nodes, edges, importGraph, clearCanvas } = useArchitectureStore();
   const { routes, workload, faults, clearAll: clearSimulation } = useSimulationStore();
   const { theme, toggleTheme } = useTheme();
@@ -285,7 +289,7 @@ export const CanvasHeader = () => {
           {/* Run Simulation Button */}
           <Button
             size="sm"
-            onClick={handleRunSimulation}
+            onClick={() => onRunSimulation?.()}
             className={cn(
               'gap-2 h-8 btn-premium gradient-primary border-0',
               'hover:opacity-90 transition-opacity'

@@ -24,14 +24,14 @@ int main() {
         return res;
 
     } catch (const runtime_error& e) {
-        // 🔵 VALIDATION / USER ERROR
+        // ALIDATION / USER ERROR
         return crow::response(
             400,
             string("Validation error: ") + e.what()
         );
 
     } catch (const exception& e) {
-        // 🔴 INTERNAL ERROR
+        // INTERNAL ERROR
         return crow::response(
             500,
             string("Internal compiler error: ") + e.what()
