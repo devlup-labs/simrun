@@ -46,7 +46,7 @@ function postToCompiler(pathname, data) {
     const options = {
       hostname: '127.0.0.1',
       port: 18080,
-      path: pathname,
+      path: '/compile',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
