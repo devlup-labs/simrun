@@ -1,0 +1,50 @@
+{
+  "header": {
+    "ir_version": "1.0",
+    "engine_version": "simrun-0.1",
+    "seed": 42,
+    "time_unit": "milliseconds"
+  },
+
+  "context": {
+    "components": [
+      {
+        "id": 1,
+        "type": "api/service",
+        "config": {
+          "dist_latency": "lognormal",
+          "base_median_latency": 30,
+          "base_variance_latency": 0.8
+        }
+      },
+      {
+        "id": 2,
+        "type": "database",
+        "config": {
+          "seek_model": "lognormal",
+          "base_median_seek_ms": 4.0,
+          "max_iops": 3000
+        }
+      },
+      {
+        "id": 3,
+        "type": "cache",
+        "config": {
+          "base_cache_hit_probability": 0.7
+        }
+      }
+    ],
+
+    "links": [
+      {
+        "id": 10,
+        "from": 2,
+        "to": 1,
+        "config": {
+          "base_median_latency": 1,
+          "base_bandwidth_mbps": 1000
+        }
+      }
+    ]
+  }
+}
