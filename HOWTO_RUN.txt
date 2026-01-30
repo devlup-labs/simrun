@@ -1,0 +1,51 @@
+How to run this project (Windows and Linux)
+
+Prerequisites (both):
+- Git
+- Node.js (16+) and npm
+- CMake (3.18+)
+- A C++ compiler/toolchain: Visual Studio (Windows) or gcc/clang + build-essential (Linux)
+- vcpkg (if the project uses vcpkg to provide C++ dependencies)
+
+1) UI (Electron + Vite)
+
+Install dependencies (both):
+- Open a terminal at the repo root
+- cd src/ui
+- npm install
+
+Development (live reload + Electron):
+- npm run electron:dev
+  - This runs Vite dev server and launches Electron after the dev server is ready.
+
+Production build and run:
+- npm run build
+- npm run electron
+  - `npm run electron` launches Electron against the built files.
+
+2) C++ components (compiler / sim)
+
+Windows (Visual Studio generator):
+- Open a Developer PowerShell or MSVC prompt
+- cd src/compiler
+- mkdir build && cd build
+- cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=..\..\vcpkg\scripts\buildsystems\vcpkg.cmake ..
+- cmake --build . --config Release
+- Run the produced executable from the build output (e.g., `build\Release\<exe>.exe`).
+
+Linux (Makefile / Ninja):
+- Open a terminal
+- cd src/compiler
+- mkdir build && cd build
+- cmake -DCMAKE_BUILD_TYPE=Release ..
+- cmake --build . -- -j$(nproc)
+- Run the produced binary (e.g., `./<executable>`).
+
+Notes:
+- If the project uses vcpkg, bootstrap vcpkg and install required packages, then use `-DCMAKE_TOOLCHAIN_FILE=/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake` when calling `cmake`.
+- Paths and executable names may vary by platform and CMake configuration; adjust the commands above to match the real CMake target and output location in your build.
+- If you only want to run the UI and not rebuild C++ components, follow section (1) only.
+
+If you want, I can:
+- Add a `README` section in `src/ui` with the same commands,
+- Or create npm scripts to automate CMake build steps from the repo root.

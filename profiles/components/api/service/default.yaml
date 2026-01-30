@@ -1,6 +1,0 @@
-defaults:
-  dist_latency: lognormal
-  base_median_latency: 30
-  base_variance_latency: 0.8
-  max_concurrency: 100
-  queue_capacity: 300

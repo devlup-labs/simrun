@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "electron": "electron .",
-    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:8080 && electron .\""
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\""
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",

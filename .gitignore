@@ -11,4 +11,4 @@ vcpkg/
 .vscode/
 *.exe
 node_modules/
-C:\Users\Admin\Desktop\simrun\src\compiler\compiler.exe
+src\compiler\compiler.exe
