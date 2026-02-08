@@ -4,6 +4,11 @@ src/ui/node_modules/
 src/ui/electron/node_modules/
 src/compiler/ast/
 src/compiler/bad.json
+src/compiler/build/
+src/compiler/compiler.pdb
+src/compiler/yaml-cppd.dll
+vcpkg/
 .vscode/
 *.exe
 node_modules/
+src\compiler\compiler.exe
