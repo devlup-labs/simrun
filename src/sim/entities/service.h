@@ -1,26 +1,30 @@
 #pragma once
-#include "../core/base_entity.h"
 
-class ServiceEntity final : public BaseEntity {
+#include <cstdint>
+#include <queue>
+#include <string>
+#include <nlohmann/json.hpp>
+
+#include "base_entity.h"
+
+// forward declaration
+class Request;
+
+class Service : public BaseEntity {
 public:
-    // ---- context (immutable) ----
-    const int capacity;
-    const double latency_mean;
-    const double failure_prob;
+    explicit Service(uint32_t id, const nlohmann::json& params);
 
-    // ---- state (mutable) ----
-    bool is_down = false;
-    int active_requests = 0;
-    int queued_requests = 0;
+private:
+    /* ---------- latency config ---------- */
+    std::string latency_dist;
+    double base_median_latency;
+    double base_variance_latency;
 
-    ServiceEntity(
-        std::string id,
-        int capacity,
-        double latency_mean,
-        double failure_prob
-    )
-        : BaseEntity(std::move(id)),
-          capacity(capacity),
-          latency_mean(latency_mean),
-          failure_prob(failure_prob) {}
+    /* ---------- capacity ---------- */
+    uint32_t max_concurrency;
+    uint32_t queue_capacity;
+
+    /* ---------- runtime state ---------- */
+    uint32_t active;
+    std::queue<Request*> queue;
 };
