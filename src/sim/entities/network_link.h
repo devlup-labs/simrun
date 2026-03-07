@@ -1,32 +1,55 @@
-#pragma once
-#include "../core/base_entity.h"
+#ifndef SIMRUN_NETWORK_LINK_H
+#define SIMRUN_NETWORK_LINK_H
+
+#include <cstdint>
 #include <string>
+#include <deque>
+#include <nlohmann/json.hpp>
 
-class NetworkLinkEntity final : public BaseEntity {
-public:
-    // ---- context ----
-    const std::string from;
-    const std::string to;
-    const double base_latency_mean;
-    const double base_failure_prob;
-    const double bandwidth;
+#include "base_entity.h"
+#include "request.h" // Needed for Request pointer
 
-    // ---- state ----
-    bool is_down = false;
-    int in_flight = 0;
-    double latency_mean = base_latency_mean;
-    double failure_prob = base_failure_prob;
-
-    NetworkLinkEntity(
-        std::string id,
-        std::string from,
-        std::string to,
-        double base_latency_mean,
-        double base_failure_prob
-    )
-        : BaseEntity(std::move(id)),
-          from(std::move(from)),
-          to(std::move(to)),
-          base_latency_mean(base_latency_mean),
-          base_failure_prob(base_failure_prob) {}
+// A "Job" represents a specific transmission attempt (e.g., a retry of 5KB)
+struct LinkJob {
+    Request* request;
+    uint32_t size_bytes; // Size for THIS transmission (shrinks on retry)
+    int attempt_count;   // 0 for fresh, >0 for retries
 };
+
+class NetworkLinkEntity : public BaseEntity {
+public:
+    explicit NetworkLinkEntity(uint32_t id, const nlohmann::json& params);
+
+    /* ---------- Topology (Immutable) ---------- */
+    std::string from;
+    std::string to;
+
+    /* ---------- Physics Config ---------- */
+    double bandwidth_mbps;       
+    double base_latency_mean;    
+    double base_packet_loss_rate;
+    double tcp_rto_ms;           
+    uint32_t mtu_bytes;          
+
+    /* ---------- Runtime State ---------- */
+    bool is_down;
+    
+    // The Queue: Holds jobs waiting for the wire
+    std::deque<LinkJob> transmission_queue;
+
+    // The Server State: Is the wire currently transmitting?
+    bool is_busy;
+
+    // Effective values (mutable by Chaos)
+    double current_packet_loss_rate;
+
+    /* ---------- Statistics ---------- */
+    struct Stats {
+        uint64_t packets_sent = 0;
+        uint64_t packets_dropped = 0;
+        uint64_t tcp_retransmits = 0;
+        uint64_t bytes_transmitted = 0;
+    } stats;
+};
+
+#endif // SIMRUN_NETWORK_LINK_H
