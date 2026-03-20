@@ -1,6 +1,0 @@
-defaults:
-  base_median_latency: 1
-  base_variance_latency: 0.5
-  base_bandwidth_mbps: 1000
-  base_packet_size_bytes: 1500
-  queue_capacity: 2048

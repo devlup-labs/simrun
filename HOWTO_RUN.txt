@@ -1,0 +1,207 @@
+===============================================================================
+                        SIMRUN - How to Run
+===============================================================================
+
+This project is a simulation system with:
+  - UI: React/TypeScript frontend with Electron desktop shell (Vite)
+  - Compiler: C++ backend for IR processing and compilation
+
+Follow the steps below for your platform.
+
+===============================================================================
+                          PREREQUISITES (BOTH PLATFORMS)
+===============================================================================
+
+1. Install Git
+   - Download from https://git-scm.com/
+
+2. Install Node.js (v16 or higher) and npm
+   - Download from https://nodejs.org/
+   - npm is included with Node.js
+   - Verify: `node --version` and `npm --version`
+
+3. Install CMake (v3.18+)
+   - Download from https://cmake.org/download/
+   - Verify: `cmake --version`
+
+4. Install a C++ compiler
+   
+   WINDOWS:
+   - Visual Studio Community 2022 (free)
+   - Download from https://visualstudio.microsoft.com/downloads/
+   - Install with "Desktop development with C++" workload
+   
+   LINUX:
+   - Ubuntu/Debian: `sudo apt-get install build-essential g++ cmake`
+   - Fedora: `sudo dnf install gcc g++ make cmake`
+   - Arch: `sudo pacman -S base-devel cmake`
+
+5. Bootstrap vcpkg (C++ dependency manager)
+   
+   WINDOWS (PowerShell):
+   - Open PowerShell and navigate to the repo root
+   - .\vcpkg\bootstrap-vcpkg.bat
+   
+   LINUX (Bash):
+   - Open terminal and navigate to the repo root
+   - ./vcpkg/bootstrap-vcpkg.sh
+
+===============================================================================
+                    OPTION 1: RUN UI ONLY (No C++ compilation)
+===============================================================================
+
+Great if you just want to develop the UI and don't need to rebuild the compiler.
+
+Steps (Both Windows & Linux):
+
+1. Navigate to UI directory
+   cd src/ui
+
+2. Install Node dependencies
+   npm install
+
+3. Start development server (with hot reload)
+   npm run electron:dev
+   
+   This will:
+   - Start the Vite dev server
+   - Launch the Electron app
+   - Auto-reload when you make changes
+
+4. Build for production (if needed)
+   npm run build
+   npm run electron
+   - Creates optimized build and launches Electron desktop app
+
+===============================================================================
+                  OPTION 2: FULL SETUP (UI + C++ Compiler)
+===============================================================================
+
+If you need to rebuild the C++ compiler component, follow this section.
+
+---
+WINDOWS (Visual Studio 2022 + CMake)
+---
+
+1. Open a "Developer PowerShell for VS 2022" (search in Windows Start menu)
+   
+2. Navigate to the compiler directory
+   cd src\compiler
+
+3. Create build directory and configure with CMake
+   mkdir build
+   cd build
+   cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=..\..\vcpkg\scripts\buildsystems\vcpkg.cmake ..
+
+4. Build the project
+   cmake --build . --config Release
+
+5. The compiled executable will be in:
+   build\Release\
+
+6. Now run the UI (from repo root)
+   cd ..\..\src\ui
+   npm install
+   npm run electron:dev
+
+---
+LINUX (CMake + GCC/Clang)
+---
+
+1. Open a terminal and navigate to the repo root
+
+2. Navigate to the compiler directory
+   cd src/compiler
+
+3. Create build directory and configure with CMake
+   mkdir build
+   cd build
+   cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../../vcpkg/scripts/buildsystems/vcpkg.cmake ..
+
+4. Build the project
+   cmake --build . -- -j$(nproc)
+   
+   (This uses all available CPU cores for faster compilation)
+
+5. The compiled binary will be in:
+   ./
+
+6. Now run the UI (from repo root)
+   cd ../../src/ui
+   npm install
+   npm run electron:dev
+
+===============================================================================
+                              TROUBLESHOOTING
+===============================================================================
+
+Issue: CMake can't find dependencies
+  Solution: Make sure vcpkg is bootstrapped (see Prerequisites step 5)
+           Ensure you're using the correct path to vcpkg.cmake
+
+Issue: Cannot find C++ compiler
+  WINDOWS: Install Visual Studio 2022 with C++ workload
+  LINUX: Run `sudo apt-get install build-essential` (Ubuntu/Debian)
+
+Issue: npm install fails
+  Solution: Clear npm cache and retry
+           npm cache clean --force
+           rm -rf node_modules
+           npm install
+
+Issue: Electron won't start
+  Solution: Try running from the repo root in a new terminal
+           Make sure all npm packages installed successfully
+           Check console output for specific error messages
+
+Issue: Port 8081 already in use (compiler server)
+  Solution: Change the compiler port in src/compiler/src/server.cpp
+           Or stop the process using port 8081
+
+===============================================================================
+                           PROJECT STRUCTURE
+===============================================================================
+
+simrun/
+├── src/
+│   ├── ui/              ← React/TypeScript frontend + Electron
+│   ├── compiler/        ← C++ compiler backend
+│   ├── sim/             ← C++ simulation engine
+│   └── analysis/        ← Analysis tools
+├── vcpkg/               ← C++ dependency manager
+├── HOWTO_RUN.txt        ← This file
+└── README.md            ← Project overview
+
+===============================================================================
+                            QUICK REFERENCE
+===============================================================================
+
+UI Development (Hot Reload):
+  cd src/ui
+  npm run electron:dev
+
+UI Production Build:
+  cd src/ui
+  npm run build
+  npm run electron
+
+Compiler Build (Windows):
+  cd src\compiler && mkdir build && cd build
+  cmake -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=..\..\vcpkg\scripts\buildsystems\vcpkg.cmake ..
+  cmake --build . --config Release
+
+Compiler Build (Linux):
+  cd src/compiler && mkdir build && cd build
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=../../vcpkg/scripts/buildsystems/vcpkg.cmake ..
+  cmake --build . -- -j$(nproc)
+
+===============================================================================
+                              GETTING HELP
+===============================================================================
+
+- Check README.md for project overview
+- Check project issues/wiki on GitHub
+- Review compiler logs: look for errors in cmake output
+- Check browser console in Electron app (press Ctrl+Shift+I)
+
+===============================================================================

@@ -14,10 +14,10 @@ interface ToolbarSectionProps {
 }
 
 const categoryIcons: Record<ComponentCategory, string> = {
-  database: '💾',
-  cache: '⚡',
-  api: '🌐',
-  network: '🔗',
+  database: '',
+  cache: '',
+  api: '',
+  network: '',
 };
 
 const categoryGradients: Record<ComponentCategory, string> = {
