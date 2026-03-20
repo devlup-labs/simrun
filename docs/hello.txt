@@ -1,0 +1,28 @@
+request:
+    request_type
+    flag
+    payload
+    progress_counter
+
+component:
+"state" : {
+          "request_specific_state":[
+            {
+              "request_type": "x",
+              "flag_specific": [
+                {
+                  "flag": "0",
+                  "function_objs": [
+                    {
+                      "function": "lb",
+                      "parameters": {
+                        "mode": "eql_prob",
+                        "flags": []
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
