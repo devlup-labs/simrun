@@ -1,51 +1,48 @@
+#include <fstream>
 #include <iostream>
-#include "ir_parser.h"
-#include "event_initializer.h"
+#include <stdexcept>
+#include <string>
 
-#include "simulation_context.h"
-#include "entity_factory.h"
-#include "event_factory.h"
-#include "scheduler.h"
-#include "simulator.h"
+#include "engine/factory/context_factory.h"
+#include "engine/factory/event_factory.h"
+#include "engine/factory/state_factory.h"
+#include "engine/ir/ir_parser.h"
+
+namespace {
+
+std::string load_ir_file(const std::string& path) {
+    std::ifstream in(path);
+    if (!in) {
+        throw std::runtime_error("Could not open IR file: " + path);
+    }
+    return path;
+}
+
+}  // namespace
 
 int main(int argc, char** argv) {
+    try {
+        if (argc < 2) {
+            std::cerr << "Usage: simrun <ir.json>\n";
+            return 1;
+        }
 
-    /* ---------- Parse IR ---------- */
-    IR ir = IRParser::parseFromFile(argv[1]);
+        const std::string ir_path = load_ir_file(argv[1]);
+        sim::ir::SimulationIR ir = sim::ir::parse_ir_file(ir_path);
+        sim::SimulationContext context = sim::factory::build_context(ir);
+        sim::SimulationState state = sim::factory::build_initial_state(ir, context);
+        sim::Simulator simulator(context, state);
 
-    /* ---------- Global Context ---------- */
-    SimulationContext ctx(
-        ir.header.seed,
-        ir.header.time_unit
-    );
+        for (const auto& bootstrap_spec : context.bootstrap_events) {
+            simulator.schedule(
+                sim::factory::create_event_from_spec(bootstrap_spec, simulator.next_seq())
+            );
+        }
 
-    /* ---------- Factories ---------- */
-    EntityFactory entityFactory(ctx);
-    EventFactory eventFactory(ctx);
-
-    /* ---------- Build Static World ---------- */
-    entityFactory.createComponents(ir.components);
-    entityFactory.createLinks(ir.links);
-
-
-    entityFactory.applyInitialComponentState(ir.initial_components);
-    entityFactory.applyInitialLinkState(ir.initial_links);
-
-    entityFactory.registerRequestTypes(ir.request_types);
-
-    /* ---------- Scheduler ---------- */
-    Scheduler scheduler;
-
-    /* ---------- Seed Initial Events ---------- */
-    EventInitializer::seedInitialEvents(
-        ir,
-        scheduler,
-        eventFactory
-    );
-
-    /* ---------- Run Simulation ---------- */
-    Simulator sim(ctx, scheduler);
-    sim.run();
-
-    return 0;
+        simulator.run();
+        return 0;
+    } catch (const std::exception& ex) {
+        std::cerr << "simrun error: " << ex.what() << "\n";
+        return 2;
+    }
 }

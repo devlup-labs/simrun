@@ -12,40 +12,19 @@
         "kind": "SERVICE",
         "params": {
           "max_concurrency": 100,
-          "queue_capacity": 300
-        }
-      },
-      {
-        "id": 2,
-        "kind": "SERVER",
-        "params": {
-          "service_time_ns": "5_000_000"
-        }
-      },
-      {
-        "id": 3,
-        "kind": "SERVER",
-        "params": {
-          "service_time_ns": "5_000_000"
+          "queue_capacity": 300,
+          "service_latency_dist": {
+            "type": "LOGNORMAL",
+            "p1": "30_000_000",
+            "p2": "0.8"
+          }
         }
       }
     ],
+
     "links": [
       {
         "id": 10,
-        "from": 0,
-        "to": 1,
-        "params": {
-          "bandwidth_mbps": 1000,
-          "latency_dist": {
-            "type": "NORMAL",
-            "p1": "1_000_000",
-            "p2": "500_000"
-          }
-        }
-      },
-      {
-        "id": 11,
         "from": 1,
         "to": 2,
         "params": {
@@ -54,47 +33,23 @@
             "type": "NORMAL",
             "p1": "1_000_000",
             "p2": "500_000"
-          }
-        }
-      },
-      {
-        "id": 13,
-        "from": 1,
-        "to": 3,
-        "params": {
-          "bandwidth_mbps": 1000,
-          "latency_dist": {
-            "type": "NORMAL",
-            "p1": "1_000_000",
-            "p2": "500_000"
-          }
+          },
+          "queue_capacity": 1024
         }
       }
     ],
+
     "request_types": [
       {
         "id": 1,
         "default_payload": {},
         "routes": [
-          [10, 11],
-          [10, 13]
+          [10, 11, 12],  
+          [10, 13, 12]   
         ]
       }
     ]
   },
-  "workloads": [
-    {
-      "id": 1,
-      "request_type": 1,
-      "target_component": 1,
-      "total_requests": 10,
-      "arrival_distribution": {
-        "type": "NORMAL",
-        "p1": "1_000_000_000",
-        "p2": "500_000_000"
-      }
-    }
-  ],
   "behavior": [
     {
       "component_id": 1,
@@ -105,7 +60,7 @@
           "op": "CHANGE_FLAG",
           "args": {
             "mode": "EQUAL_PROB",
-            "values": [0, 1]
+            "values": [0,1]
           }
         },
         {
@@ -120,29 +75,11 @@
         "id": 1,
         "active": 0,
         "queue_size": 0
-      },
-      {
-        "id": 2,
-        "active": 0,
-        "queue_size": 0
-      },
-      {
-        "id": 3,
-        "active": 0,
-        "queue_size": 0
       }
     ],
     "links": [
       {
         "id": 10,
-        "current_bandwidth": 1000
-      },
-      {
-        "id": 11,
-        "current_bandwidth": 1000
-      },
-      {
-        "id": 13,
         "current_bandwidth": 1000
       }
     ],
@@ -153,7 +90,8 @@
       "time": 0,
       "type": "WORKLOAD_ARRIVAL",
       "payload": {
-        "workload_id": 1
+        "request_type": 1,
+        "target_component": 1
       }
     },
     {
