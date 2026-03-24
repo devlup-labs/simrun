@@ -1,0 +1,1169 @@
+﻿{
+    "global_parameters":  {
+                              "time_unit":  1,
+                              "horizon":  2000,
+                              "seed":  987654321,
+                              "max_requests":  512,
+                              "payload_words":  16,
+                              "max_tokens":  8192
+                          },
+    "components":  [
+                       {
+                           "id":  0,
+                           "capacity":  2,
+                           "state_words":  4,
+                           "waiting_queue_capacity":  128,
+                           "service_time":  2,
+                           "discipline":  "Fifo"
+                       },
+                       {
+                           "id":  1,
+                           "capacity":  2,
+                           "state_words":  4,
+                           "waiting_queue_capacity":  128,
+                           "service_time":  3,
+                           "discipline":  "Fifo"
+                       },
+                       {
+                           "id":  2,
+                           "capacity":  2,
+                           "state_words":  4,
+                           "waiting_queue_capacity":  128,
+                           "service_time":  1,
+                           "discipline":  "Fifo"
+                       }
+                   ],
+    "links":  [
+                  {
+                      "id":  0,
+                      "src_component_id":  0,
+                      "dst_component_id":  1,
+                      "propagation_delay":  1,
+                      "bandwidth":  1
+                  },
+                  {
+                      "id":  1,
+                      "src_component_id":  1,
+                      "dst_component_id":  2,
+                      "propagation_delay":  2,
+                      "bandwidth":  1
+                  },
+                  {
+                      "id":  2,
+                      "src_component_id":  2,
+                      "dst_component_id":  0,
+                      "propagation_delay":  1,
+                      "bandwidth":  1
+                  },
+                  {
+                      "id":  3,
+                      "src_component_id":  1,
+                      "dst_component_id":  0,
+                      "propagation_delay":  3,
+                      "bandwidth":  1
+                  },
+                  {
+                      "id":  4,
+                      "src_component_id":  0,
+                      "dst_component_id":  2,
+                      "propagation_delay":  2,
+                      "bandwidth":  1
+                  }
+              ],
+    "request_types":  [
+                          {
+                              "id":  0,
+                              "flag_count":  2,
+                              "max_hops":  3
+                          },
+                          {
+                              "id":  1,
+                              "flag_count":  2,
+                              "max_hops":  2
+                          }
+                      ],
+    "routing_entries":  [
+                            {
+                                "request_type":  0,
+                                "flag":  0,
+                                "hop":  0,
+                                "link_id":  0
+                            },
+                            {
+                                "request_type":  0,
+                                "flag":  0,
+                                "hop":  1,
+                                "link_id":  1
+                            },
+                            {
+                                "request_type":  0,
+                                "flag":  0,
+                                "hop":  2,
+                                "link_id":  2
+                            },
+                            {
+                                "request_type":  0,
+                                "flag":  1,
+                                "hop":  0,
+                                "link_id":  4
+                            },
+                            {
+                                "request_type":  0,
+                                "flag":  1,
+                                "hop":  1,
+                                "link_id":  2
+                            },
+                            {
+                                "request_type":  0,
+                                "flag":  1,
+                                "hop":  2,
+                                "link_id":  3
+                            },
+                            {
+                                "request_type":  1,
+                                "flag":  0,
+                                "hop":  0,
+                                "link_id":  1
+                            },
+                            {
+                                "request_type":  1,
+                                "flag":  0,
+                                "hop":  1,
+                                "link_id":  2
+                            },
+                            {
+                                "request_type":  1,
+                                "flag":  1,
+                                "hop":  0,
+                                "link_id":  0
+                            },
+                            {
+                                "request_type":  1,
+                                "flag":  1,
+                                "hop":  1,
+                                "link_id":  4
+                            }
+                        ],
+    "opcode_stream":  [
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           9000,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10000,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2000,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10001,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2001,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           1,
+                                           2,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10010,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2010,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           1,
+                                           2,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10011,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2011,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10100,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2100,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "SpawnRequest",
+                              "args":  [
+                                           1,
+                                           1,
+                                           2,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10101,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2101,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           1,
+                                           2,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10110,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2110,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           1,
+                                           2,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10111,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2111,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10200,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2200,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           0,
+                                           1,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10201,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2201,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           1,
+                                           2,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10210,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2210,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "AddComponentStateWord",
+                              "args":  [
+                                           1,
+                                           2,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "WritePayloadWord",
+                              "args":  [
+                                           2,
+                                           10211,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "Log",
+                              "args":  [
+                                           2211,
+                                           0,
+                                           0,
+                                           0
+                                       ]
+                          },
+                          {
+                              "opcode":  "RouteNextLink",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "IncrementHop",
+                              "args":  [
+
+                                       ]
+                          },
+                          {
+                              "opcode":  "Halt",
+                              "args":  [
+
+                                       ]
+                          }
+                      ],
+    "behavior_bindings":  [
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  2
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  8
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  14
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  20
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  0,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  26
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  33
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  39
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  45
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  1,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  51
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  0,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  57
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  0,
+                                  "flag":  1,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  63
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  0,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "RequestArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "ServiceCompletion",
+                                  "instruction_pointer":  69
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "TimerExpiration",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "ResponseArrival",
+                                  "instruction_pointer":  0
+                              },
+                              {
+                                  "component_id":  2,
+                                  "request_type":  1,
+                                  "flag":  1,
+                                  "phase":  "WorkloadGeneration",
+                                  "instruction_pointer":  0
+                              }
+                          ],
+    "workloads":  [
+                      {
+                          "request_type":  0,
+                          "initial_flag":  0,
+                          "entry_component_id":  0,
+                          "start_time":  0,
+                          "interval":  2,
+                          "count":  6
+                      },
+                      {
+                          "request_type":  0,
+                          "initial_flag":  1,
+                          "entry_component_id":  2,
+                          "start_time":  1,
+                          "interval":  3,
+                          "count":  4
+                      }
+                  ],
+    "bootstrap_events":  [
+                             {
+                                 "time":  0,
+                                 "request_type":  0,
+                                 "flag":  1,
+                                 "component_id":  0,
+                                 "phase":  "RequestArrival"
+                             },
+                             {
+                                 "time":  1,
+                                 "request_type":  1,
+                                 "flag":  0,
+                                 "component_id":  1,
+                                 "phase":  "RequestArrival"
+                             }
+                         ]
+}

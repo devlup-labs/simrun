@@ -1,0 +1,89 @@
+{
+  "global_parameters": {
+    "time_unit": 1,
+    "horizon": 1000,
+    "seed": 42,
+    "max_requests": 128,
+    "payload_words": 8,
+    "max_tokens": 512
+  },
+  "components": [
+    {
+      "id": 0,
+      "capacity": 1,
+      "state_words": 4,
+      "waiting_queue_capacity": 32,
+      "service_time": 1,
+      "discipline": "Fifo"
+    }
+  ],
+  "links": [
+    {
+      "id": 0,
+      "src_component_id": 0,
+      "dst_component_id": 0,
+      "propagation_delay": 1,
+      "bandwidth": 1
+    }
+  ],
+  "request_types": [
+    {
+      "id": 0,
+      "flag_count": 1,
+      "max_hops": 1
+    }
+  ],
+  "routing_entries": [
+    {
+      "request_type": 0,
+      "flag": 0,
+      "hop": 0,
+      "link_id": 0
+    }
+  ],
+  "behavior_bindings": [
+    {
+      "component_id": 0,
+      "request_type": 0,
+      "flag": 0,
+      "phase": "RequestArrival",
+      "instruction_pointer": 0
+    },
+    {
+      "component_id": 0,
+      "request_type": 0,
+      "flag": 0,
+      "phase": "ServiceCompletion",
+      "instruction_pointer": 0
+    },
+    {
+      "component_id": 0,
+      "request_type": 0,
+      "flag": 0,
+      "phase": "TimerExpiration",
+      "instruction_pointer": 0
+    },
+    {
+      "component_id": 0,
+      "request_type": 0,
+      "flag": 0,
+      "phase": "ResponseArrival",
+      "instruction_pointer": 0
+    },
+    {
+      "component_id": 0,
+      "request_type": 0,
+      "flag": 0,
+      "phase": "WorkloadGeneration",
+      "instruction_pointer": 0
+    }
+  ],
+  "opcode_stream": [
+    {
+      "opcode": "Halt",
+      "args": []
+    }
+  ],
+  "workloads": [],
+  "bootstrap_events": []
+}
