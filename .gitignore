@@ -1,6 +1,48 @@
+# ─── C++ Build Artifacts ───────────────────────────────────────────────────
+*.exe
+*.pdb
+*.dll
+*.obj
+*.o
+*.a
+*.lib
+*.so
+*.dylib
+src/compiler/build/
+src/sim/build/
+
+# ─── Project-specific ──────────────────────────────────────────────────────
+src/compiler/ast/
+src/compiler/bad.json
+vcpkg/
+
+# ─── Node / Frontend ───────────────────────────────────────────────────────
+node_modules/
 src/electron/node_modules/
 src/ui-lovable/node_modules/
 src/ui/node_modules/
-src/compiler/ast/
-src/compiler/bad.json
+dist/
+
+# ─── Python ────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ─── Environment / Secrets ─────────────────────────────────────────────────
+.env
+.env.*
+
+# ─── Logs ──────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ─── IDE / Editor ──────────────────────────────────────────────────────────
 .vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── OS ────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
